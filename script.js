@@ -9,6 +9,7 @@ function changeSize() {
     if (width < "10") {
         width = 10
     }
+    
     if (height < "10") {
         height = 10
     }
