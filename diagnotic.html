@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+    <script src="script.js"></script>
 </head>
 
 <div class="center">
@@ -16,33 +17,33 @@
 <div class="center">
     <p>Width</p>
 
-    <input type="number">
+    <input type="number" onchange="changeSize()" id="width-input">
 
     <p>Height</p>
 
-    <input type="number">
+    <input type="number" id="height-input" onchange="changeSize()">
 
     <p>Color:</p>
-    <input type="color">
+    <input type="color" id="color-input" onchange="changeColor()">
 </div>
 
 
 <div class="center">
     <h3>Width</h3>
 
-    <p>0px</p>
+    <p id="width-label">0px</p>
 
     <h3>Height</h3>
 
-    <p>0px</p>
+    <p id="height-label">0px</p>
 
     <h3>Color</h3>
 
-    <p>#</p>
+    <p id="color-label">#</p>
 
 </div>
 
 <div class="center">
     <h1>Color</h1>
-    <div>Color</div>
+    <div id="color-box"></div>
 </div>
