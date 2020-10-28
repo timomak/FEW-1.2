@@ -42,7 +42,7 @@ var bricks = [];
 for (var c = 0; c < brickColumnCount; c++) {
   bricks[c] = [];
   for (var r = 0; r < brickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 }; // add a status to track if it has been hit
+    bricks[c][r] = { x: 0, y: 0, status: 2 }; // add a status to track if it has been hit
   }
 }
 
@@ -83,7 +83,7 @@ function collisionDetection() {
     for (var r = 0; r < brickRowCount; r++) {
       var b = bricks[c][r];
       // Avoid checking for bricks that were already hit
-      if (b.status == 1) {
+      if (b.status == 1 || b.status == 2) {
         // Check if the ball is making contact with the brick
         if (
           x > b.x &&
@@ -92,11 +92,11 @@ function collisionDetection() {
           y < b.y + brickHeight
         ) {
           dy = -dy; // Reverse ball direction
-          b.status = 0; // set the brick to hit
+          b.status -= 1; // set the brick to hit
           score++; // add to the score
 
           // Win when the score is equal to the number of bricks
-          if (score == brickRowCount * brickColumnCount) {
+          if (score == brickRowCount * brickColumnCount * 2) {
             alert("YOU WIN, CONGRATS!");
             document.location.reload();
           }
@@ -129,6 +129,16 @@ function drawBricks() {
   for (var c = 0; c < brickColumnCount; c++) {
     for (var r = 0; r < brickRowCount; r++) {
       if (bricks[c][r].status == 1) {
+        var brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
+        var brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+        ctx.fillStyle = "#ff0000";
+        ctx.fill();
+        ctx.closePath();
+      } else if (bricks[c][r].status == 2) {
         var brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
         var brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
         bricks[c][r].x = brickX;
